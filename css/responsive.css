@@ -1,0 +1,14 @@
+@media only screen and (min-width: 0px) and (max-width: 0px) {}
+
+/*--------------------------
+02. scroll-bar-remover
+--------------------------*/
+@media screen and (max-width: 1279px) {
+	body {
+		overflow-x: hidden !important;
+	}
+
+	.container {
+		max-width: 100% !important;
+	}
+}

@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/uicons-brands/css/uicons-brands.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css"
+    />
+    <style>
+      .wrapper {
+        position: relative;
+        width: 100%;
+        overflow: auto;
+      }
+
+      /* ---------------------------------------------------
+          SIDEBAR STYLE start
+      ----------------------------------------------------- */
+
+      #sidebar {
+        position: fixed;
+        height: 100vh !important;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 11;
+        width: 260px;
+        transition: all 0.3s;
+        background: #ffffff;
+        box-shadow: 0 10px 30px -12px rgb(0 0 0 / 42%),
+          0 4px 25px 0px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%);
+      }
+
+      #sidebar ul.components {
+        padding: 20px 0;
+        margin-top: 8rem;
+        height: 100%;
+      }
+
+      #sidebar .profile-details {
+        position: fixed;
+        display: flex;
+        width: 260px;
+        align-items: center;
+        justify-content: center;
+        padding: 29px 0;
+        transition: all 0.3s ease;
+        align-content: center;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        margin-bottom: 30px;
+      }
+
+      #sidebar .profile-details .profile-content {
+        display: flex;
+        align-items: center;
+      }
+
+      #sidebar .profile-details img {
+        height: 52px;
+        width: 52px;
+        object-fit: cover;
+        border-radius: 25px;
+        margin: 0 14px 0 12px;
+        background: #1d1b31;
+        transition: all 0.5s ease;
+      }
+
+      #sidebar.active .profile-details {
+        background: none;
+      }
+
+      #sidebar.active .profile-details {
+        width: 80px;
+      }
+
+      #sidebar .profile-details span {
+        font-size: 17px;
+        font-weight: 500;
+        margin-top: 10px;
+        color: #2196f3;
+        white-space: nowrap;
+        opacity: 1;
+        transition: all 0.3s ease;
+      }
+
+      #sidebar.active .profile-details span {
+        opacity: 0;
+        display: none;
+      }
+
+      #sidebar .nav-links {
+        padding: 30px 0 150px 0;
+        overflow: auto;
+      }
+
+      #sidebar.active .nav-links {
+        overflow: visible;
+      }
+
+      #sidebar::-webkit-scrollbar {
+        width: 4px;
+        border-radius: 10px;
+      }
+
+      #sidebar::-webkit-scrollbar-track {
+        background: #ffffff;
+      }
+
+      #sidebar::-webkit-scrollbar-thumb {
+        background: #2196f3;
+        border-radius: 10px;
+      }
+
+      #sidebar .nav-links::-webkit-scrollbar {
+        display: none;
+      }
+
+      #sidebar .nav-links li {
+        position: relative;
+        margin: 10px;
+        list-style: none;
+        transition: all 0.4s ease;
+        border-radius: 6px;
+      }
+
+      #sidebar .nav-links li .iocn-link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      #sidebar.active .nav-links li .iocn-link {
+        display: block;
+      }
+
+      #sidebar .nav-links li i {
+        height: 55px;
+        min-width: 60px;
+        text-align: center;
+        display: flex;
+        line-height: 60px;
+        color: #2196f3;
+        font-size: 24px;
+        cursor: pointer;
+        transition: all 0.4s ease;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #sidebar .nav-links li.showMenu i.arrow {
+        transform: rotate(-180deg);
+      }
+
+      #sidebar.active .nav-links i.arrow {
+        display: none;
+      }
+
+      #sidebar .nav-links li a {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+      }
+
+      #sidebar .nav-links li a .link_name {
+        color: #2196f3;
+        margin-left: 6px;
+        font-size: 18px;
+        font-weight: 500;
+        white-space: nowrap;
+        opacity: 1;
+        transition: all 0.3s ease;
+      }
+
+      #sidebar.active .nav-links li a .link_name {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      #sidebar .nav-links li .sub-menu {
+        padding: 10px 50px;
+        background: #1b1c1f;
+        display: none;
+      }
+
+      #sidebar .nav-links li.showMenu .sub-menu {
+        display: block;
+      }
+
+      #sidebar .nav-links li .sub-menu a {
+        color: #fff;
+        font-size: 15px;
+        padding: 5px 0;
+        white-space: nowrap;
+        opacity: 0.6;
+        transition: all 0.3s ease;
+      }
+
+      #sidebar .nav-links li .sub-menu a:hover {
+        opacity: 1;
+      }
+
+      #sidebar.active .nav-links li .sub-menu {
+        position: absolute;
+        left: 60px;
+        top: -10px;
+        margin-top: 0;
+        padding: 10px 20px;
+        border-radius: 0 6px 6px 0;
+        opacity: 0;
+        display: block;
+        pointer-events: none;
+        transition: 0.3s;
+      }
+
+      #sidebar.active .nav-links li:hover .sub-menu {
+        top: 0;
+        opacity: 1;
+        pointer-events: auto;
+        transition: all 0.4s ease;
+      }
+
+      #sidebar .nav-links li .sub-menu .link_name {
+        display: none;
+      }
+
+      #sidebar.active .nav-links li .sub-menu .link_name {
+        font-size: 17px;
+        opacity: 1;
+        display: block;
+      }
+
+      #sidebar .nav-links li .sub-menu.blank {
+        opacity: 1;
+        pointer-events: auto;
+        padding: 3px 20px 6px 16px;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      #sidebar .nav-links li:hover .sub-menu.blank {
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      /****   icon  *****/
+      #sidebar .nav-links li:hover i {
+        color: #fff;
+      }
+
+      /****   text  *****/
+      #sidebar .nav-links li:hover a .link_name {
+        color: #fff;
+      }
+
+      /*** bg ***/
+      #sidebar .nav-links li:hover {
+        background: #2196f3;
+      }
+
+      /***********************/
+
+      #content {
+        position: relative;
+        height: 100vh;
+        transition: all 0.3s;
+        background-color: #eeeeee;
+      }
+
+      .top-navbar {
+        width: 100%;
+        z-index: 9;
+        position: relative;
+      }
+
+      .main-content {
+        padding: 10px 20px 0px 20px;
+        position: relative;
+        width: 100%;
+      }
+
+      .navbar {
+        background-color: #2196f3;
+        color: #ffffff;
+      }
+
+      .navbar-brand {
+        color: #ffffff;
+      }
+
+      .navbar button {
+        background-color: transparent;
+        border: none;
+      }
+
+      .navbar button span {
+        color: #fff;
+      }
+
+      #sidebarCollapse {
+        border: none;
+        margin-left: 10px;
+      }
+
+      #sidebarCollapse span {
+        padding: 0px;
+      }
+
+      .navbar-nav > li.active {
+        color: #ffffff;
+        border-radius: 4px;
+        background-color: rgba(0, 0, 0, 0.08);
+      }
+
+      .navbar-nav > li > a {
+        color: #ffffff;
+      }
+
+      .navbar-nav > .active > a:focus {
+        color: #ffffff;
+        background-color: rgba(0, 0, 0, 0.08);
+      }
+
+      .navbar-nav li a {
+        position: relative;
+        display: block;
+        padding: 10px 15px !important;
+      }
+
+      #sidebar.show-nav {
+        transform: translatex(0%);
+        opacity: 1;
+        display: block;
+        visibility: visible;
+        z-index: 15;
+      }
+
+      /* ---------------------------------------------------
+          MEDIAQUERIES
+          ----------------------------------------------------- */
+
+      @media only screen and (min-width: 992px) {
+        #sidebar.active {
+          width: 80px;
+          position: absolute !important;
+          overflow: auto !important;
+        }
+
+        #sidebar.active ul li a span {
+          display: none;
+          transition: all 0.5s ease;
+        }
+
+        #content {
+          width: calc(100% - 260px);
+          position: relative;
+          float: right;
+          transition: all 0.3s;
+          background-color: #eeeeee;
+        }
+
+        #content.active {
+          width: calc(100% - 80px);
+        }
+      }
+
+      @media only screen and (min-width: 992px) {
+      }
+
+      /*===============small-screen overlay sidebar design media queries==============*/
+
+      @media only screen and (max-width: 992px) {
+        #sidebar {
+          position: fixed;
+          top: 0;
+          bottom: 0;
+          z-index: 10;
+          width: 280px;
+          transform: translatex(-100%);
+          transition: all 150ms linear;
+          box-shadow: none !important;
+        }
+      }
+
+      /*===============small-screen overlay sidebar design media queries==============*/
+
+      .hamburger {
+        display: block;
+      }
+
+      @media only screen and (max-width: 768px) {
+        .hamburger {
+          display: block;
+          cursor: pointer;
+        }
+      }
+
+      .bar {
+        display: block;
+        width: 32px;
+        height: 4px;
+        margin: 5px auto;
+        border-radius: 50px;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        background-color: #fff;
+      }
+
+      .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+      }
+
+      .hamburger.active .bar:nth-child(1) {
+        -webkit-transform: translateY(8px) rotate(45deg);
+        transform: translateY(8px) rotate(45deg);
+      }
+
+      .hamburger.active .bar:nth-child(3) {
+        -webkit-transform: translateY(-10px) rotate(-45deg);
+        transform: translateY(-10px) rotate(-45deg);
+      }
+
+      /* ---------------------------------------------------
+          MEDIAQUERIES
+          ----------------------------------------------------- */
+    </style>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <!-- Sidebar  -->
+      <nav id="sidebar">
+        <div class="profile-details">
+          <div class="profile-content">
+            <img
+              src="https://images.hdqwalls.com/download/hood-boy-skyscraper-neon-lights-4k-h4-320x240.jpg"
+              alt="profileImg"
+            />
+          </div>
+          <span>Name of logo</span>
+        </div>
+
+        <ul class="components nav-links">
+          <li id="hover">
+            <a href="#">
+              <i class="bx bxs-dashboard"></i>
+              <span class="link_name">Dashboard</span>
+            </a>
+            <div class="sub-menu blank">
+              <span><a class="link_name" href="#">Dashboard</a></span>
+            </div>
+          </li>
+
+          <li>
+            <a href="#">
+              <i class="bx bxs-user-account"></i>
+              <span class="link_name">Mi cuenta</span>
+            </a>
+            <div class="sub-menu blank">
+              <span><a class="link_name" href="#">Mi cuenta</a></span>
+            </div>
+          </li>
+
+          <li>
+            <a href="#">
+              <i class="bx bxs-store-alt"></i>
+              <span class="link_name">Productos</span>
+            </a>
+            <div class="sub-menu blank">
+              <span><a class="link_name" href="#">Productos</a></span>
+            </div>
+          </li>
+
+          <li>
+            <a href="#">
+              <i class="bx bx-data"></i>
+              <span class="link_name">Combinaciones</span>
+            </a>
+            <div class="sub-menu blank">
+              <span><a class="link_name" href="#">Combinaciones</a></span>
+            </div>
+          </li>
+
+          <li>
+            <a href="#">
+              <i class="bx bx-duplicate"></i>
+              <span class="link_name">Operadores</span>
+            </a>
+            <div class="sub-menu blank">
+              <span><a class="link_name" href="#">Operadores</a></span>
+            </div>
+          </li>
+
+          <li>
+            <div class="iocn-link">
+              <a href="#">
+                <i class="bx bxs-receipt"></i>
+                <span class="link_name">Suscripcion</span>
+              </a>
+              <i class="fi fi-sr-caret-down arrow"></i>
+            </div>
+            <ul class="sub-menu">
+              <span><a class="link_name" href="#">Suscripcion</a></span>
+              <span><a href="#">Realizar pago</a></span>
+              <span><a href="#">Historico de pago</a></span>
+            </ul>
+          </li>
+
+          <li>
+            <a href="#">
+              <i class="bx bxs-report"></i>
+              <span class="link_name">Reportes</span>
+            </a>
+            <div class="sub-menu blank">
+              <span><a class="link_name" href="#">Reportes</a></span>
+            </div>
+          </li>
+
+          <li>
+            <a href="#">
+              <i class="bx bx-briefcase"></i>
+              <span class="link_name">Reporte Varios</span>
+            </a>
+            <div class="sub-menu blank">
+              <span><a class="link_name" href="#">Reporte Varios</a></span>
+            </div>
+          </li>
+
+          <li>
+            <a href="#">
+              <i class="bx bx-dish"></i>
+              <span class="link_name">Tasa</span>
+            </a>
+            <div class="sub-menu blank">
+              <span><a class="link_name" href="#">Tasa</a></span>
+            </div>
+          </li>
+
+          <li>
+            <a href="#">
+              <i class="bx bxs-help-circle"></i>
+              <span class="link_name">Soporte y Ayuda</span>
+            </a>
+            <div class="sub-menu blank">
+              <span><a class="link_name" href="#">Soporte y Ayuda</a></span>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Page Content  -->
+      <div id="content">
+        <div class="top-navbar">
+          <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid headerJ">
+              <button
+                type="button"
+                id="sidebarCollapse"
+                class="hamburger d-xl-block d-lg-block d-md-mone d-none"
+              >
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+              </button>
+
+              <h3>Dashboard</h3>
+
+              <button
+                class="d-inline-block d-lg-none ml-auto more-button"
+                type="button"
+              >
+                <div class="hamburger">
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </div>
+              </button>
+            </div>
+          </nav>
+        </div>
+
+        <div class="main"></div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("#sidebarCollapse").on("click", function () {
+          $("#sidebar").toggleClass("active");
+          $("#content").toggleClass("active");
+        });
+
+        $(".more-button").on("click", function () {
+          $("#sidebar").toggleClass("show-nav");
+        });
+      });
+
+      const hamburger = document.querySelector(".hamburger");
+
+      hamburger.addEventListener("click", mobileMenu);
+
+      function mobileMenu() {
+        hamburger.classList.toggle("active");
+      }
+
+      function activeMenu() {
+        hamburger.classList.remove("active");
+      }
+
+      let arrow = document.querySelectorAll(".arrow");
+      for (var i = 0; i < arrow.length; i++) {
+        arrow[i].addEventListener("click", (e) => {
+          let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
+          arrowParent.classList.toggle("showMenu");
+        });
+      }
+
+      // mouseover
+
+      const li = document.getElementById("hover");
+      const body = document.getElementById("content");
+
+      const smcrn = window.innerWidth;
+      let screen = 700;
+      if (smcrn <= screen) {
+        body.style.background = "blue";
+      } else {
+        body.style.background = "#fff";
+      }
+    </script>
+  </body>
+</html>
